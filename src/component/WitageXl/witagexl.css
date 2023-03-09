@@ -1,0 +1,31 @@
+.witagexl {
+  flex: 2;
+  -webkit-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+}
+.witageXlTitle {
+  font-size: 22px;
+  font-weight: 600;
+}
+.table {
+  width: 100%;
+  border-spacing: 20px;
+}
+.witageTableTh {
+  text-align: left;
+}
+
+.witagePatient {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+.patientImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 5px;
+}

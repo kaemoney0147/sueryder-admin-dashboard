@@ -1,0 +1,43 @@
+.features {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.featuresItem {
+  flex: 1;
+  margin: 0px 20px;
+  padding: 30px;
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+}
+.featureTitle {
+  font-size: 20px;
+}
+.featureNumbers {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+}
+.featureAdmission {
+  font-size: 30px;
+  font-weight: 600px;
+}
+.featureDeath {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+.featureIcons {
+  font-size: 14px;
+  margin-left: 5px;
+  color: green;
+}
+.featureIcons.negative {
+  color: red;
+}
+.featureSub {
+  font-size: 15px;
+  color: gray;
+}

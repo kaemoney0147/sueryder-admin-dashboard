@@ -1,0 +1,55 @@
+.witagesm {
+  flex: 1;
+  -webkit-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+  margin-left: 20px;
+}
+.witageTitle {
+  font-size: 22px;
+  font-weight: 400;
+}
+.witageSmImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.witageSmList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.witageSmListitem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+.witageSmUser {
+  font-weight: 400;
+}
+.witageBtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 10px;
+  background-color: #eeeef7;
+  color: #555;
+}
+.witageSmIcon {
+  margin-right: 5px;
+  font-size: 15px;
+}
+.patientImage {
+  display: flex;
+  flex-direction: column;
+}
+.patientImage > img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

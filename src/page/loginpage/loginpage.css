@@ -1,0 +1,58 @@
+.login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.loginTop > img {
+  width: 200px;
+  height: 100px;
+}
+.loginWrapper {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid black;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin-right: 10px;
+}
+.FormLabel {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(143, 132, 132);
+}
+.forminput {
+  height: 20px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.submitAdmissionBtn {
+  margin-top: 10px;
+  width: 100px;
+  height: 50px;
+  border: none;
+  background-color: bisque;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 20px;
+  cursor: pointer;
+}
