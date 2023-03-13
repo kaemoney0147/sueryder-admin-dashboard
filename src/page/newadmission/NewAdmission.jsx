@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import "./newadmission.css";
 export default function NewAdmission() {
   const [firstName, SetFirstName] = useState("");
@@ -63,7 +62,7 @@ export default function NewAdmission() {
       console.log(error);
     }
   };
-
+  useEffect(() => {});
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -75,10 +74,8 @@ export default function NewAdmission() {
         },
       };
       const response = await fetch("http://localhost:3001/patient", options);
-      uploadImage();
       if (response) {
         alert("You have successfully register this patient");
-        window.location.reload();
       }
     } catch (error) {}
   };

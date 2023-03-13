@@ -100,14 +100,14 @@ export default function SinglePatient() {
       console.log(error);
     }
   };
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     dispatch({
       type: EDIT_PROFILE,
       payload: changeVaules,
     });
     uploadImage();
-    profileEdit(changeVaules);
+    await profileEdit(changeVaules);
   };
 
   useEffect(() => {
