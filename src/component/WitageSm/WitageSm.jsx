@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./witagesm.css";
 import { MdOutlineVisibility } from "react-icons/md";
+// import { getAccessToken } from "../../redux/action/index.js";
+import { useSelector } from "react-redux";
 
 export default function WitageSm() {
   const [loguser, setLoguser] = useState([]);
-  console.log(loguser);
+
+  const token = useSelector((state) => state.user.accessToken);
 
   const fetchUsers = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
     try {
-      const response = await fetch("http://localhost:3001/users");
+      const response = await fetch("http://localhost:3001/users", options);
       if (response) {
         const data = await response.json();
         setLoguser(data.users);
@@ -20,20 +30,24 @@ export default function WitageSm() {
   }, []);
   return (
     <div className="witagesm">
-      <span className="witageTitle">USERS</span>
+      <span className="witageTitle">New Users</span>
       <ul className="witageSmList">
-        {loguser.map((u) => (
-          <li className="witageSmListitem" key={u._id}>
-            <img className="witageSmImage" src={u.avatar} alt="" />
-            <div className="witageSmUser">
-              <span>{u.username}</span>
-            </div>
-            <button className="witageBtn">
-              <MdOutlineVisibility className="witageSmIcon" />
-              Display
-            </button>
-          </li>
-        ))}
+        {loguser
+
+          .map((u) => (
+            <li className="witageSmListitem" key={u._id}>
+              <img className="witageSmImage" src={u.avatar} alt="" />
+              <div className="witageSmUser">
+                <span>{u.username}</span>
+              </div>
+              <button className="witageBtn">
+                <MdOutlineVisibility className="witageSmIcon" />
+                Display
+              </button>
+            </li>
+          ))
+          .reverse()
+          .slice(0, 2)}
       </ul>
     </div>
   );

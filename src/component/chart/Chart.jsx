@@ -6,6 +6,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  YAxis,
 } from "recharts";
 import { useEffect, useState } from "react";
 
@@ -43,6 +44,7 @@ export default function Chart({ grid }) {
       <ResponsiveContainer width="100%" aspect={4}>
         <LineChart data={months}>
           <XAxis dataKey="name" stroke="#5550bd" />
+          <YAxis />
           <Line type="monotone" dataKey="Admission" stroke="#5550bd" />
           <Tooltip />
           {grid && <CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5" />}

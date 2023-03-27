@@ -1,24 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPatient } from "../../redux/action";
 import "./witagexl.css";
 
 export default function WitageXl() {
-  const [patient, setPatient] = useState([]);
-
-  const fetchPatient = async () => {
-    try {
-      const url = await fetch("http://localhost:3001/patient");
-      if (url.ok) {
-        const response = await url.json();
-        console.log(response);
-        setPatient(response);
-      } else {
-        console.log("Erro fecthing Patient List");
-      }
-    } catch (error) {}
-  };
+  const patient = useSelector((state) => state.patient.patient);
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetchPatient();
-  }, []);
+    dispatch(getAllPatient());
+  }, [patient]);
   return (
     <div className="witagexl">
       <h3 className="witageXlTitle">New Admimission</h3>

@@ -3,85 +3,142 @@ import "./userlist.css";
 import { MdDelete, MdEditNote } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPatient } from "../../redux/action/index.js";
 
 export default function UserList() {
-  const [patient, setPatient] = useState([]);
+  const patient = useSelector((state) => state.patient.patient);
+
+  const dispatch = useDispatch();
+  const [querylist, setQueryList] = useState([]);
+
+  const [query, setQuery] = useState("");
   const [sliceIndex, setSliceIndex] = useState(0);
   const sliceSize = 10;
 
-  const fetchPatient = async () => {
-    try {
-      const url = await fetch("http://localhost:3001/patient");
-      if (url.ok) {
-        const response = await url.json();
-        console.log(response);
-        setPatient(response);
-      } else {
-        console.log("Erro fecthing Patient List");
-      }
-    } catch (error) {}
+  const handleChange = (e) => {
+    setQuery(e.target.value);
   };
+  const handleQuery = () => {
+    let wardQuert = [];
+    wardQuert = patient.filter(
+      (q) =>
+        q.ward.toLowerCase().includes(query) ||
+        q.firstName.toLowerCase().includes(query)
+    );
+    setQueryList(wardQuert);
+  };
+  useEffect(() => {
+    handleQuery();
+  }, [query]);
   const nextSlice = () => {
-    setSliceIndex(sliceIndex + sliceSize);
+    const nextIndex = sliceIndex + sliceSize;
+    if (nextIndex >= patient.length) {
+      return;
+    }
+    setSliceIndex(nextIndex);
   };
 
   const prevSlice = () => {
-    setSliceIndex(sliceIndex - sliceSize);
+    const prevIndex = sliceIndex - sliceSize;
+    if (prevIndex < 0) {
+      return;
+    }
+    setSliceIndex(prevIndex);
   };
   useEffect(() => {
-    fetchPatient();
+    dispatch(getAllPatient());
   }, []);
   return (
     <div className="Patient">
       <div className="patientProfile">
-        <h1 className="patientTitle">ALL PATIENT</h1>
+        <h3 className="patientTitle">ALL PATIENT</h3>
+        <input
+          placeholder="Search"
+          type="search"
+          className="SearchInput"
+          onChange={handleChange}
+        ></input>
         <Link to={"/newpatient"}>
           <button className="crateAdmission">New Admission</button>
         </Link>
       </div>
       <Table striped bordered hover className="patientTable">
         <thead>
-          <tr className="PatientTr">
-            <th className="patientTableTh">Name</th>
-            <th className="patientTableTh">Admission Date</th>
-            <th className="patientTableTh">Time</th>
-            <th className="patientTableTh">Allocated Room</th>
-            <th className="patientTableTh">Ward</th>
-            <th className="patientTableTh">Dob</th>
+          <tr>
+            <th>Name</th>
+            <th>Admission Date</th>
+            <th>Time</th>
+            <th>Allocated Room</th>
+            <th>Ward</th>
+            <th>Dob</th>
           </tr>
         </thead>
-
-        <tbody>
-          {patient
-            .map((p, i) => (
-              <tr className="th" key={i}>
-                <td className="patientTabelTd">
-                  <img className="patientImg" src={p.image} alt="" />
-                  <span>
-                    {p.firstName} {p.lastName}
-                  </span>
-                </td>
-                <td>{p.admission.date}</td>
-
-                <td>{p.admission.time}</td>
-                <td>{p.room}</td>
-                <td>{p.ward}</td>
-                <td>{p.dob}</td>
-                <span className="patientDeleteBtn">
-                  <Link to={`/editpatient/${p._id}`}>
-                    <MdEditNote className="PatientIcons" />
-                  </Link>
-                  <Link to={`/delete/${p._id}`}>
+        {query ? (
+          <tbody>
+            {querylist
+              .map((p, i) => (
+                <tr key={i}>
+                  <td className="patientTabelTd">
+                    <img className="patientImg" src={p.image} alt="" />
                     <span>
-                      <MdDelete className="PatientIcons" />
+                      {p.firstName} {p.lastName}
                     </span>
-                  </Link>
-                </span>
-              </tr>
-            ))
-            .slice(sliceIndex, sliceIndex + sliceSize)
-            .reverse()}
-        </tbody>
+                  </td>
+                  <td className="tableTd">{p.admission.date}</td>
+
+                  <td className="tableTd">{p.admission.time}</td>
+                  <td className="tableTd">{p.room}</td>
+                  <td className="tableTd">{p.ward}</td>
+                  <td className="tableTd">{p.dob}</td>
+                  <span className="patientDeleteBtn">
+                    <Link to={`/editpatient/${p._id}`}>
+                      <MdEditNote className="PatientIcons" />
+                    </Link>
+                    <Link to={`/delete/${p._id}`}>
+                      <span>
+                        <MdDelete className="patientDeleteBtn" />
+                      </span>
+                    </Link>
+                  </span>
+                </tr>
+              ))
+              .slice(sliceIndex, sliceIndex + sliceSize)
+              .reverse()}
+          </tbody>
+        ) : (
+          <tbody>
+            {patient
+              .map((p, i) => (
+                <tr key={i}>
+                  <td className="patientTabelTd">
+                    <img className="patientImg" src={p.image} alt="" />
+                    <span>
+                      {p.firstName} {p.lastName}
+                    </span>
+                  </td>
+                  <td className="tableTd">{p.admission.date}</td>
+
+                  <td className="tableTd">{p.admission.time}</td>
+                  <td className="tableTd">{p.room}</td>
+                  <td className="tableTd">{p.ward}</td>
+                  <td className="tableTd">{p.dob}</td>
+                  <span className="patientDeleteBtn">
+                    <Link to={`/editpatient/${p._id}`}>
+                      <MdEditNote className="PatientIcons" />
+                    </Link>
+                    <Link to={`/delete/${p._id}`}>
+                      <span>
+                        <MdDelete className="patientDeleteBtn" />
+                      </span>
+                    </Link>
+                  </span>
+                </tr>
+              ))
+              .slice(sliceIndex, sliceIndex + sliceSize)
+              .reverse()}
+          </tbody>
+        )}
       </Table>
       <div className="patientButton">
         <button className="btnPatient" onClick={prevSlice}>

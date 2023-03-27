@@ -1,63 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { LOGIN_REQUEST } from "../../redux/action/index.js";
+import { useDispatch, useSelector } from "react-redux";
+// import { LOGIN_REQUEST } from "../../redux/action/index.js";
 import { useNavigate } from "react-router-dom";
+import { getAccessToken } from "../../redux/action/index.js";
 import "./loginpage.css";
 
 export default function HomeComponent() {
-  const [user, setUser] = useState("");
+  const [username, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userLogin = {
-    username: user,
-    password: password,
-  };
+  const userStatus = useSelector((state) => state.user.loginStatus);
+  const loginStatusMessage = userStatus?.status;
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    loginUser();
+    // setError("Username and password do not match");
   };
-  const fetchMyData = async (data) => {
-    try {
-      const response = await fetch("http://localhost:3001/users/me", {
-        headers: { Authorization: `Bearer ${data.accessToken}` },
-        "Content-Type": "application/json",
-      });
-      if (response.ok) {
-        const data = await response.json();
-        dispatch({ type: LOGIN_REQUEST, payload: data });
-      } else {
-        console.log("Error while fetching my profile");
-      }
-    } catch (error) {
-      console.log(error);
+
+  const loginUser = () => {
+    const userLogin = {
+      username: username,
+      password: password,
+    };
+    dispatch(getAccessToken(userLogin));
+  };
+
+  useEffect(() => {
+    if (loginStatusMessage === "success") {
+      navigate("/home");
     }
-  };
-  const handleLogin = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userLogin),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-
-        localStorage.setItem("userLogin", data.accessToken);
-        await fetchMyData(data);
-        navigate("/home");
-      } else {
-        setError("Username and password do not match");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  }, [userStatus]);
   return (
     <Container className="login">
       <div className="loginTop">
@@ -73,7 +49,7 @@ export default function HomeComponent() {
                 type="text"
                 placeholder="Enter Username"
                 className="forminput"
-                value={user}
+                value={username}
                 onChange={(e) => setUser(e.target.value)}
               />
             </Form.Group>
@@ -92,7 +68,7 @@ export default function HomeComponent() {
             <button
               className="submitAdmissionBtn"
               type="submit"
-              onClick={handleLogin}
+              onClick={loginUser}
             >
               Login
             </button>

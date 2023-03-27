@@ -1,15 +1,26 @@
 import {
-  List_OF_PATIENT,
   LOGIN_REQUEST,
+  SET_ACCESS_TOKEN,
+  USER_STATUS,
+  LOGOUT_USER,
+  DELETE_ACCESS_TOKEN,
   EDIT_PROFILE,
-} from "../action/index.js";
+} from "../../redux/action/index.js";
+
 const initialState = {
-  patientFood: {
-    patient: [],
-  },
   userInfo: {
     _id: "",
     username: "",
+    avatar: "",
+  },
+  accessToken: {
+    token: null,
+  },
+  loginStatus: {
+    status: null,
+  },
+  currentUser: {
+    userSignIn: null,
   },
   data: {
     changeVaules: [],
@@ -18,23 +29,39 @@ const initialState = {
 
 export const getListOfUser = (state = initialState, action) => {
   switch (action.type) {
-    case List_OF_PATIENT:
-      return {
-        ...state,
-        patient: action.payload,
-      };
     case LOGIN_REQUEST: {
       return {
         ...state,
         userInfo: action.payload,
       };
     }
-    case EDIT_PROFILE: {
+    case SET_ACCESS_TOKEN: {
+      return {
+        ...state,
+        accessToken: action.payload,
+      };
+    }
+    case USER_STATUS: {
+      return {
+        ...state,
+        loginStatus: action.payload,
+      };
+    }
+    case LOGOUT_USER:
+      return {
+        ...state,
+        currentUser: action.payload,
+      };
+    case DELETE_ACCESS_TOKEN:
+      return {
+        ...state,
+        accessToken: action.payload,
+      };
+    case EDIT_PROFILE:
       return {
         ...state,
         data: action.payload,
       };
-    }
     default:
       return state;
   }

@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { getListOfUser } from "../reducer/index.js";
 import localStorage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import { fetchAllPatient } from "../reducer/PatientReducer.js";
 
 const persistConfig = {
   key: "root",
@@ -10,6 +11,7 @@ const persistConfig = {
 
 const bigReducer = combineReducers({
   user: getListOfUser,
+  patient: fetchAllPatient,
 });
 
 const persistedReducer = persistReducer(persistConfig, bigReducer);
