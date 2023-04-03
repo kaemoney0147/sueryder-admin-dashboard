@@ -18,6 +18,7 @@ export default function SinglePatient() {
   const [title, setTitle] = useState("");
   const [age, setAge] = useState("");
   const [room, setRoom] = useState("");
+  const [disease, setDisease] = useState("");
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -30,12 +31,12 @@ export default function SinglePatient() {
     firstName: firstName,
     lastName: lastName,
     dob: dob,
-    age: age,
     Gender: Gender,
     title: title,
     discription: discription,
     ward: ward,
     room: room,
+    disease: disease,
   };
 
   const fetchUserbyId = async () => {
@@ -56,6 +57,7 @@ export default function SinglePatient() {
         setWard(data.ward);
         setAge(data.age);
         setRoom(data.room);
+        setDisease(data.disease);
       } else {
         console.log("error fetching user");
       }
@@ -74,7 +76,6 @@ export default function SinglePatient() {
       if (url.ok) {
         const response = await url.json();
         console.log(response);
-        alert("You have sucessfuly change patient infomation");
       } else {
         console.log("something went wrong");
       }
@@ -102,12 +103,20 @@ export default function SinglePatient() {
   };
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    // Call profileEdit function to update patient information
+    await profileEdit(changeVaules);
+
+    // Call uploadImage function to upload the image
+    await uploadImage();
+
+    // Dispatch action to update state if needed
     dispatch({
       type: EDIT_PROFILE,
       payload: changeVaules,
     });
-    uploadImage();
-    await profileEdit(changeVaules);
+
+    // Show success message
+    alert("Patient information updated successfully.");
   };
 
   useEffect(() => {
@@ -118,7 +127,7 @@ export default function SinglePatient() {
     <div className="singlepatient">
       <div className="patienWrapper">
         <div className="patientTitle">
-          <h3 className="title">Updat Patient Info</h3>
+          <h3 className="title">Updat Patient Information</h3>
         </div>
       </div>
       <div className="leftsidePatientInfo">
@@ -127,12 +136,12 @@ export default function SinglePatient() {
           <span>
             Name: {data.title} {data.firstName} {data.lastName}
           </span>
-          <span>Age: {data.Age}</span>
+          <span>Age: {data.age}</span>
           <span>Ward: {data.ward}</span>
           <span>Date of Birth: {data.dob}</span>
         </div>
         <div>
-          <div>
+          <div className="uploadBtn">
             <label htmlFor="file-input">
               <FiUpload className="inputField" />
             </label>
@@ -153,7 +162,6 @@ export default function SinglePatient() {
               <Form.Label className="FormLabel">Title</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="e.g Mr,Mrs "
                 className="forminput"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -220,7 +228,7 @@ export default function SinglePatient() {
                 onChange={(e) => setGender(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="form-group">
+            {/* <Form.Group className="form-group">
               <Form.Label className="FormLabel">Image</Form.Label>
               <Form.Control
                 type="text"
@@ -228,6 +236,16 @@ export default function SinglePatient() {
                 className="forminput"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
+              />
+            </Form.Group> */}
+            <Form.Group className="form-group">
+              <Form.Label className="FormLabel">Disease</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Disease"
+                className="forminput"
+                value={disease}
+                onChange={(e) => setDisease(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="form-group">

@@ -22,17 +22,15 @@ export default function AddUser() {
   const creatUser = async (e) => {
     e.preventDefault();
     try {
-      let options = {
+      let opt = {
         method: "POST",
         body: JSON.stringify(user),
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
-      const response = await fetch(
-        "http://localhost:3001/users/register",
-        options
-      );
+      const response = await fetch("http://localhost:3001/users/register", opt);
       if (response.ok) {
         alert("user created sucessfully!");
         setUserName("");
@@ -175,7 +173,7 @@ export default function AddUser() {
               required
             >
               <option>Select</option>
-              <option>Guest</option>
+              <option>Carer</option>
               <option>Admin</option>
             </select>
           </Form.Group>

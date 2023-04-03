@@ -52,7 +52,7 @@ export default function UserList() {
   return (
     <div className="Patient">
       <div className="patientProfile">
-        <h3 className="patientTitle">ALL PATIENT</h3>
+        <h3 className="patientTitle">Patient Dashboard</h3>
         <input
           placeholder="Search"
           type="search"
@@ -69,7 +69,7 @@ export default function UserList() {
             <th>Name</th>
             <th>Admission Date</th>
             <th>Time</th>
-            <th>Allocated Room</th>
+            <th>Room</th>
             <th>Ward</th>
             <th>Dob</th>
           </tr>
@@ -92,13 +92,14 @@ export default function UserList() {
                   <td className="tableTd">{p.ward}</td>
                   <td className="tableTd">{p.dob}</td>
                   <span className="patientDeleteBtn">
+                    <Link to={`/patientrecord/${p._id}`}>
+                      <button className="patientRecord">Records</button>
+                    </Link>
                     <Link to={`/editpatient/${p._id}`}>
                       <MdEditNote className="PatientIcons" />
                     </Link>
                     <Link to={`/delete/${p._id}`}>
-                      <span>
-                        <MdDelete className="patientDeleteBtn" />
-                      </span>
+                      <MdDelete className="patientDeleteBtn" />
                     </Link>
                   </span>
                 </tr>
@@ -123,7 +124,11 @@ export default function UserList() {
                   <td className="tableTd">{p.room}</td>
                   <td className="tableTd">{p.ward}</td>
                   <td className="tableTd">{p.dob}</td>
+
                   <span className="patientDeleteBtn">
+                    <Link to={`/patientrecord/${p._id}`}>
+                      <button className="patientRecord">Records</button>
+                    </Link>
                     <Link to={`/editpatient/${p._id}`}>
                       <MdEditNote className="PatientIcons" />
                     </Link>

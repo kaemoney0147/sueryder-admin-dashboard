@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import "./newadmission.css";
 export default function NewAdmission() {
@@ -14,6 +14,7 @@ export default function NewAdmission() {
   const [date, SetDate] = useState("");
   const [time, SetTime] = useState("");
   const [room, SetRoom] = useState("");
+  const [disease, setDisease] = useState("");
 
   const data = {
     firstName: firstName,
@@ -21,6 +22,7 @@ export default function NewAdmission() {
     Gender: Gender,
     title: title,
     age: age,
+    disease: disease,
     admission: {
       date: date,
       time: time,
@@ -53,10 +55,7 @@ export default function NewAdmission() {
     };
 
     try {
-      let response = await fetch(
-        `http://localhost:3001/patient/upload`,
-        options
-      );
+      let response = await fetch(`http://localhost:3001/patient`, options);
       if (response.ok) {
       }
     } catch (error) {
@@ -66,6 +65,7 @@ export default function NewAdmission() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    uploadImage();
     try {
       let options = {
         method: "POST",
@@ -76,23 +76,31 @@ export default function NewAdmission() {
       };
       const response = await fetch("http://localhost:3001/patient", options);
       if (response) {
-        // uploadImage();
         alert("You have successfully register this patient");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
+  // useEffect(() => {
+  //   uploadImage();
+  // });
   return (
     <div className="newadmision">
       <Form className="form">
         <Form.Group className="form-group" onSubmit={handleSubmit}>
           <Form.Label className="FormLabel">Title</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="e.g Mr,Mrs "
-            className="forminput"
+          <select
             value={title}
             onChange={(e) => SetTitle(e.target.value)}
-          />
+            className="select"
+          >
+            <option>Please Select</option>
+            <option>Mr</option>
+            <option>Mrs</option>
+            <option>Miss</option>
+            <option>Master</option>
+          </select>
         </Form.Group>
         <Form.Group className="form-group">
           <Form.Label className="FormLabel">First Name</Form.Label>
@@ -137,7 +145,7 @@ export default function NewAdmission() {
         <Form.Group className="form-group">
           <Form.Label className="FormLabel">Room</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             placeholder="Allocated Room"
             className="forminput"
             value={room}
@@ -146,15 +154,18 @@ export default function NewAdmission() {
         </Form.Group>
         <Form.Group className="form-group">
           <Form.Label className="FormLabel">Gender</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Gender"
-            className="forminput"
+          <select
             value={Gender}
             onChange={(e) => setGender(e.target.value)}
-          />
+            className="select"
+          >
+            <option>Please Select</option>
+            <option>Female</option>
+            <option>Male</option>
+            <option>Others</option>
+          </select>
         </Form.Group>
-        <Form.Group className="form-group">
+        {/* <Form.Group className="form-group">
           <Form.Label className="FormLabel">Image</Form.Label>
           <Form.Control
             type="file"
@@ -162,16 +173,38 @@ export default function NewAdmission() {
             className="forminput"
             onChange={(e) => setImage(e.target.files[0])}
           />
+        </Form.Group> */}
+        <Form.Group className="form-group">
+          <Form.Label className="FormLabel">Disease</Form.Label>
+          <select
+            value={disease}
+            onChange={(e) => setDisease(e.target.value)}
+            className="select"
+          >
+            <option>Please Select</option>
+            <option>Epilepsy and Seizures</option>
+            <option>Cerebral Aneurysm</option>
+            <option>Brain Tumors</option>
+            <option>Bell's Palsy</option>
+            <option>Ataxia</option>
+            <option>Alzheimer's Disease</option>
+            <option>Acute Spinal Cord Injury</option>
+            <option>Demential</option>
+            <option>Others</option>
+          </select>
         </Form.Group>
         <Form.Group className="form-group">
           <Form.Label className="FormLabel">Ward</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Unit"
-            className="forminput"
+          <select
             value={ward}
             onChange={(e) => SetWard(e.target.value)}
-          />
+            className="select"
+          >
+            <option>Please Select</option>
+            <option>Codicote</option>
+            <option>Digswell</option>
+            <option>Benington</option>
+          </select>
         </Form.Group>
         <Form.Group className="form-group">
           <Form.Label className="FormLabel">Date</Form.Label>
@@ -196,6 +229,7 @@ export default function NewAdmission() {
         <Form.Group className="form-group">
           <Form.Label className="FormLabel">Discription</Form.Label>
           <Form.Control
+            className="foodSelect"
             as="textarea"
             placeholder="Patient History"
             value={discription}

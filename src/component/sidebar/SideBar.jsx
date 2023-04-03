@@ -3,6 +3,7 @@ import { HiHome } from "react-icons/hi";
 import { FaUserTie } from "react-icons/fa";
 import { GiTelepathy } from "react-icons/gi";
 import { MdReport, MdLogout } from "react-icons/md";
+// import { GiDeathSkull } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../../redux/action";
 import { useDispatch } from "react-redux";
@@ -40,6 +41,12 @@ export default function SideBar() {
                 Patient
               </li>
             </Link>
+            {/* <Link to={"/death"} className="Link">
+              <li className="sidebarbarItem">
+                <GiDeathSkull className="sidebar-icons" />
+                Death
+              </li>
+            </Link> */}
             <li className="sidebarbarItem">
               <MdReport className="sidebar-icons" />
               Report

@@ -25,6 +25,11 @@
 .fileUpload {
   display: none;
 }
+.uploadBtn {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
 
 .rightsidePatientInfo {
   flex: 2;
@@ -37,6 +42,10 @@
 .singlePatientform {
   display: flex;
   flex-wrap: wrap;
+  margin-right: 10px;
+}
+.patienWrapper {
+  margin-left: 10px;
 }
 .patientImage > img {
   width: 200px;

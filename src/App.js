@@ -1,16 +1,18 @@
 import SideBar from "./component/sidebar/SideBar";
 import TopNav from "./component/topbar/TopNav";
+
 import "./app.css";
 import Home from "./page/home/Home";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserList from "./page/userlist/UserList";
 import SinglePatient from "./page/singlepatient/SinglePatient";
 import NewAdmission from "./page/newadmission/NewAdmission";
 import LoginPage from "./page/loginpage/LoginPage";
-import { useState } from "react";
+
 import { useSelector } from "react-redux";
 import DeletePatient from "./page/deletepatient/DeletePatient";
 import AddUser from "./page/adduser/AddUser";
+import Records from "./page/records/Records";
 
 function App() {
   // const { isloading, setIsloading } = useState(false);
@@ -41,6 +43,7 @@ function App() {
           <Route path="/user/" element={<AddUser />} />
 
           <Route exact path="/" element={<LoginPage />} />
+          <Route exact path="/patientrecord/:id" element={<Records />} />
         </Routes>
       </div>
     </BrowserRouter>
