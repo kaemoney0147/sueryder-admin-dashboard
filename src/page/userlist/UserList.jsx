@@ -104,8 +104,8 @@ export default function UserList() {
                   </span>
                 </tr>
               ))
-              .slice(sliceIndex, sliceIndex + sliceSize)
-              .reverse()}
+              .reverse()
+              .slice(sliceIndex, sliceIndex + sliceSize)}
           </tbody>
         ) : (
           <tbody>
@@ -140,8 +140,8 @@ export default function UserList() {
                   </span>
                 </tr>
               ))
-              .slice(sliceIndex, sliceIndex + sliceSize)
-              .reverse()}
+              .reverse()
+              .slice(sliceIndex, sliceIndex + sliceSize)}
           </tbody>
         )}
       </Table>

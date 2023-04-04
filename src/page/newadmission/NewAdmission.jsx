@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import "react-toastify/dist/ReactToastify.css";
 import "./newadmission.css";
+import { ToastContainer, toast } from "react-toastify";
 export default function NewAdmission() {
   const [firstName, SetFirstName] = useState("");
   const [lastName, SetLastName] = useState("");
@@ -76,7 +78,7 @@ export default function NewAdmission() {
       };
       const response = await fetch("http://localhost:3001/patient", options);
       if (response) {
-        alert("You have successfully register this patient");
+        toast("You have successfully register this patient");
       }
     } catch (error) {
       console.log(error);
@@ -227,15 +229,16 @@ export default function NewAdmission() {
           />
         </Form.Group>
         <Form.Group className="form-group">
-          <Form.Label className="FormLabel">Discription</Form.Label>
+          <Form.Label className="FormLabel">Description</Form.Label>
           <Form.Control
             className="foodSelect"
             as="textarea"
-            placeholder="Patient History"
+            placeholder="Medical History"
             value={discription}
             onChange={(e) => SetDiscription(e.target.value)}
           />
         </Form.Group>
+        <ToastContainer />
       </Form>
       <Button
         className="submitAdmissionBtn"

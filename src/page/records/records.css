@@ -1,6 +1,7 @@
 .recordCotainer {
   flex: 4;
   margin: 10px;
+  margin-top: 0;
 }
 .recordTask {
   display: flex;
@@ -10,6 +11,11 @@
 
   /* text-decoration: none; */
   /* align-items: center; */
+}
+.RecordTitle {
+  font-size: 30px;
+  color: #1c6ea4;
+  margin-bottom: 10px;
 }
 .recordsBtn {
   border: 1px solid #1c6ea4;

@@ -6,6 +6,9 @@
   align-items: center;
   justify-content: space-between;
 }
+.userTitleContainer > h3 {
+  color: gray;
+}
 .userContainer {
   display: flex;
   width: 90%;

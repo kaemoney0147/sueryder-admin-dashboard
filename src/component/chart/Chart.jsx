@@ -13,12 +13,22 @@ import { useEffect, useState } from "react";
 export default function Chart({ grid }) {
   const [newData, setNewData] = useState([]);
   const { format } = require("date-fns");
-  let months = newData.reverse().map((month) => {
-    return {
-      name: format(new Date(2023, month._id.month - 1), "MMM"),
-      Admission: month.numberOfPatients,
-    };
-  });
+  // let months = newData.map((month) => {
+  //   return {
+  //     name: format(new Date(2023, month._id.month - 1), "MMM"),
+  //     Admission: month.numberOfPatients,
+  //   };
+  // });
+  let months = newData
+    .map((month) => {
+      return {
+        name: format(new Date(2023, month._id.month - 1), "MMM"),
+        Admission: month.numberOfPatients,
+      };
+    })
+    .sort((a, b) => {
+      return new Date("2000 " + a.name) - new Date("2000 " + b.name);
+    });
 
   const fetchPatient = async () => {
     try {
