@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import "./deletepatient.css";
-
+import { ToastContainer, toast } from "react-toastify";
 export default function DeletePatient() {
   const params = useParams();
   const id = params.id;
@@ -30,7 +31,7 @@ export default function DeletePatient() {
         options
       );
       if (url.ok) {
-        alert("You have sucessfuly delete patient infomation");
+        toast("You have sucessfuly delete patient infomation");
         navigate("/home");
       } else {
         console.log("something went wrong");
@@ -64,6 +65,7 @@ export default function DeletePatient() {
       <button onClick={deleteProfile} className="deletBtn">
         Delete
       </button>
+      <ToastContainer />
     </div>
   );
 }

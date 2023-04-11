@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { FiUpload } from "react-icons/fi";
+import "react-toastify/dist/ReactToastify.css";
 import "../adduser/adduser.css";
+import { ToastContainer, toast } from "react-toastify";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
@@ -32,7 +34,7 @@ export default function AddUser() {
       };
       const response = await fetch("http://localhost:3001/users/register", opt);
       if (response.ok) {
-        alert("user created sucessfully!");
+        toast("user created sucessfully!");
         setUserName("");
         setPassword("");
         setRole("");
@@ -180,6 +182,7 @@ export default function AddUser() {
           <button className="creatUserBtn" type="submit">
             Create User
           </button>
+          <ToastContainer />
         </Form>
       </div>
     </div>

@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import "./singlepatient.css";
 import { EDIT_PROFILE } from "../../redux/action";
 import { FiUpload } from "react-icons/fi";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function SinglePatient() {
   const [isfetch, setIsfetch] = useState(false);
@@ -116,7 +118,7 @@ export default function SinglePatient() {
     });
 
     // Show success message
-    alert("Patient information updated successfully.");
+    toast("Patient information updated successfully.");
   };
 
   useEffect(() => {
@@ -267,6 +269,7 @@ export default function SinglePatient() {
                 onChange={(e) => setDiscription(e.target.value)}
               />
             </Form.Group>
+            <ToastContainer />
           </Form>
           <Button
             id="submitAdmissionBtn"
