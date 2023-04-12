@@ -32,7 +32,7 @@ export default function Chart({ grid }) {
 
   const fetchPatient = async () => {
     try {
-      const url = await fetch("http://localhost:3001/patient/chart");
+      const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/chart`);
       if (url.ok) {
         const response = await url.json();
         const list = response;
