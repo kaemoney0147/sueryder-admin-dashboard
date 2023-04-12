@@ -261,7 +261,7 @@ export default function SinglePatient() {
               />
             </Form.Group>
             <Form.Group className="form-group">
-              <Form.Label className="FormLabel">Discription</Form.Label>
+              <Form.Label className="FormLabel">Description</Form.Label>
               <Form.Control
                 as="textarea"
                 placeholder="Patient History"

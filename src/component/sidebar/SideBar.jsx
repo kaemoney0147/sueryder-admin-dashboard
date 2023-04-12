@@ -51,10 +51,12 @@ export default function SideBar() {
               <MdReport className="sidebar-icons" />
               Report
             </li>
-            <li className="sidebarbarItem">
-              <MdLogout className="sidebar-icons" onClick={logOut} />
-              Logout
-            </li>
+            <Link to={"/"} onClick={logOut} className="Link">
+              <li className="sidebarbarItem">
+                <MdLogout className="sidebar-icons" />
+                Logout
+              </li>
+            </Link>
           </ul>
         </div>
       </div>

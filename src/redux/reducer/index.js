@@ -11,6 +11,8 @@ const initialState = {
   userInfo: {
     _id: "",
     username: "",
+    firstName: "",
+    lastName: "",
     avatar: "",
   },
   accessToken: {

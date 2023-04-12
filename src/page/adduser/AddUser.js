@@ -11,6 +11,8 @@ import { MdDelete } from "react-icons/md";
 export default function AddUser() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [role, setRole] = useState("");
   const [listofuser, setListofUser] = useState([]);
 
@@ -20,6 +22,8 @@ export default function AddUser() {
     username: username,
     password: password,
     role: role,
+    firstName: firstName,
+    lastName: lastName,
   };
   const creatUser = async (e) => {
     e.preventDefault();
@@ -144,6 +148,28 @@ export default function AddUser() {
         <h3>Add New</h3>
         <Form onSubmit={creatUser}>
           <Form.Group className="form-group">
+            <Form.Label className="FormLabel">First Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="First Name"
+              className="forminput"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="form-group">
+            <Form.Label className="FormLabel">Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Last Name"
+              className="forminput"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="form-group">
             <Form.Label className="FormLabel">Username</Form.Label>
             <Form.Control
               type="text"
@@ -175,7 +201,8 @@ export default function AddUser() {
               required
             >
               <option>Select</option>
-              <option>Carer</option>
+              <option>Care Assistance</option>
+              <option>Nurse</option>
               <option>Admin</option>
             </select>
           </Form.Group>

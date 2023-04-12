@@ -22,7 +22,10 @@ export default function TopNav() {
               <AiTwotoneSetting />
             </div>
             <span className="profile-image">
-              <img src="IMG_6951.jpg" alt="profileimage" />
+              <img
+                src="https://media.istockphoto.com/id/1373258655/photo/happy-nurse-at-hospital.jpg?b=1&s=170667a&w=0&k=20&c=qeigp16Mw6wEL-bE22nSnVLSaoBzBZtRUNRyXCQ6qrg="
+                alt="profileimage"
+              />
             </span>
           </div>
         </div>
