@@ -18,7 +18,7 @@ export default function Records() {
   const singlePatientFood = async () => {
     try {
       let url = await fetch(
-        `http://localhost:3001/foodchart/patient/${userId}`
+        `${process.env.REACT_APP_BE_URL}/foodchart/patient/${userId}`
       );
       if (url.ok) {
         const response = await url.json();

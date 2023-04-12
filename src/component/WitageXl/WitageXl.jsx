@@ -8,7 +8,7 @@ export default function WitageXl() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllPatient());
-  }, [patient]);
+  }, []);
   return (
     <div className="witagexl">
       <h3 className="witageXlTitle">New Admimission</h3>

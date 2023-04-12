@@ -18,7 +18,10 @@ export default function WitageSm() {
       },
     };
     try {
-      const response = await fetch("http://localhost:3001/users", options);
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/users`,
+        options
+      );
       if (response) {
         const data = await response.json();
         setLoguser(data.users);
