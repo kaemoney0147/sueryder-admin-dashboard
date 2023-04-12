@@ -32,7 +32,9 @@ export default function Records() {
 
   const singlePatientFluid = async () => {
     try {
-      let url = await fetch(`http://localhost:3001/fluid/patient/${userId}`);
+      let url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/fluid/patient/${userId}`
+      );
       if (url.ok) {
         const response = await url.json();
         setFluid(response);
@@ -44,7 +46,9 @@ export default function Records() {
   };
   const singleBowel = async () => {
     try {
-      let url = await fetch(`http://localhost:3001/bowel/patient/${userId}`);
+      let url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/bowel/patient/${userId}`
+      );
       if (url.ok) {
         const response = await url.json();
         setBowel(response);
@@ -65,7 +69,7 @@ export default function Records() {
         },
       };
       const url = await fetch(
-        `http://localhost:3001/fluid/${item._id}/delete`,
+        `${process.env.REACT_APP_BE_URL}/fluid/${item._id}/delete`,
         option
       );
       if (url.ok) {
@@ -85,7 +89,7 @@ export default function Records() {
         },
       };
       const url = await fetch(
-        `http://localhost:3001/foodchart/${item._id}/delete`,
+        `${process.env.REACT_APP_BE_URL}/foodchart/${item._id}/delete`,
         option
       );
       if (url.ok) {
@@ -105,7 +109,7 @@ export default function Records() {
         },
       };
       const url = await fetch(
-        `http://localhost:3001/bowel/${item._id}/delete`,
+        `${process.env.REACT_APP_BE_URL}/bowel/${item._id}/delete`,
         option
       );
       if (url.ok) {

@@ -11,7 +11,7 @@ export default function DeletePatient() {
   const navigate = useNavigate();
   const fetchSinglePatient = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/patient/${id}`);
+      const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/${id}`);
       if (url.ok) {
         const newData = await url.json();
         setData(newData);
@@ -27,7 +27,7 @@ export default function DeletePatient() {
         },
       };
       const url = await fetch(
-        `http://localhost:3001/patient/${id}/delete`,
+        `${process.env.REACT_APP_BE_URL}/patient/${id}/delete`,
         options
       );
       if (url.ok) {

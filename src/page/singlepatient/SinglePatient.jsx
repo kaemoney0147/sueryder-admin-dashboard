@@ -43,7 +43,7 @@ export default function SinglePatient() {
 
   const fetchUserbyId = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/patient/${id}`);
+      const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/${id}`);
       if (url.ok) {
         const response = await url.json();
         console.log(response);
@@ -74,7 +74,10 @@ export default function SinglePatient() {
           "Content-Type": "application/json",
         },
       };
-      const url = await fetch(`http://localhost:3001/patient/${id}`, options);
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/patient/${id}`,
+        options
+      );
       if (url.ok) {
         const response = await url.json();
         console.log(response);
@@ -94,7 +97,7 @@ export default function SinglePatient() {
 
     try {
       let response = await fetch(
-        `http://localhost:3001/patient/${id}/upload`,
+        `${process.env.REACT_APP_BE_URL}/patient/${id}/upload`,
         options
       );
       if (response.ok) {

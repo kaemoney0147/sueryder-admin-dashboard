@@ -36,7 +36,10 @@ export default function AddUser() {
           "Content-Type": "application/json",
         },
       };
-      const response = await fetch("http://localhost:3001/users/register", opt);
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/users/register`,
+        opt
+      );
       if (response.ok) {
         toast("user created sucessfully!");
         setUserName("");
@@ -55,7 +58,10 @@ export default function AddUser() {
       },
     };
     try {
-      const response = await fetch("http://localhost:3001/users", options);
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/users`,
+        options
+      );
       if (response.ok) {
         const receivedData = await response.json();
         console.log(receivedData.users);
@@ -78,7 +84,7 @@ export default function AddUser() {
         },
       };
       const url = await fetch(
-        `http://localhost:3001/users/${user._id}`,
+        `${process.env.REACT_APP_BE_URL}/users/${user._id}`,
         option
       );
       if (url.ok) {

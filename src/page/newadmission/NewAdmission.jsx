@@ -57,7 +57,10 @@ export default function NewAdmission() {
     };
 
     try {
-      let response = await fetch(`http://localhost:3001/patient`, options);
+      let response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/patient`,
+        options
+      );
       if (response.ok) {
       }
     } catch (error) {
@@ -76,7 +79,10 @@ export default function NewAdmission() {
           "Content-Type": "application/json",
         },
       };
-      const response = await fetch("http://localhost:3001/patient", options);
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/patient`,
+        options
+      );
       if (response) {
         toast("You have successfully register this patient");
       }

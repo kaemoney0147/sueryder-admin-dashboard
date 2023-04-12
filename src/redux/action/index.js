@@ -8,9 +8,10 @@ export const LIST_OF_QUERY = "LIST_OF_QUERY";
 export const EDIT_PROFILE = "EDIT_PROFILE";
 
 export const getAllPatient = () => {
+  const apiUrl = process.env.REACT_APP_BE_URL;
   return async (dispatch, getstate) => {
     try {
-      let url = await fetch("http://localhost:3001/patient");
+      let url = await fetch(`${apiUrl}/patient`);
 
       if (url.ok) {
         const response = await url.json();
@@ -24,7 +25,7 @@ export const getAllPatient = () => {
   };
 };
 
-const baseEndpoint = "http://localhost:3001";
+// const baseEndpoint = `${apiUrl}/patient`;
 export const getAccessToken = (userLogin) => {
   return async (dispatch) => {
     const options = {
@@ -35,7 +36,10 @@ export const getAccessToken = (userLogin) => {
       },
     };
     try {
-      const response = await fetch(baseEndpoint + "/users/admin", options);
+      const response = await fetch(
+        process.env.REACT_APP_BE_URL + "/users/admin",
+        options
+      );
       if (response.ok) {
         const tokens = await response.json();
         const tokenReceived = await tokens.accessToken;
@@ -54,7 +58,10 @@ export const getAccessToken = (userLogin) => {
                 Authorization: "Bearer " + tokenReceived,
               },
             };
-            const userResponse = await fetch(baseEndpoint + "/users/me", opts);
+            const userResponse = await fetch(
+              process.env.REACT_APP_BE_URL + "/users/me",
+              opts
+            );
             if (userResponse.ok) {
               const user = await userResponse.json();
 
